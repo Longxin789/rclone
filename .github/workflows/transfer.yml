@@ -27,7 +27,7 @@ jobs:
     # 3. 执行复制任务 (OneDrive -> WebDAV)
     - name: Run Rclone Copy
       run: |
-        rclone copy "hi168:hi168-19236-6825fib7" "6pan:备份" \
+        rclone copy "hi168:hi168-19236-6825fib7" "onedrive:" \
           --transfers 4 \
           --checkers 8 \
           --buffer-size 64M \
