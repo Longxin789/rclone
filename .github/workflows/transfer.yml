@@ -1,0 +1,43 @@
+name: Rclone Transfer OneDrive to WebDAV
+
+# 触发方式：手动 + 定时
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  rclone-copy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. 安装 Rclone
+    - name: Install Rclone
+      run: |
+        sudo -v ; curl https://rclone.org/install.sh | sudo bash
+
+    # 2. 写入配置文件 (记得你刚才更新了 Secrets 哦！)
+    - name: Setup Rclone Config
+      run: |
+        mkdir -p ~/.config/rclone
+        echo "${{ secrets.RCLONE_CONF }}" | base64 -d > ~/.config/rclone/rclone.conf
+        # 验证一下
+        ls -l ~/.config/rclone/rclone.conf
+
+    # 3. 执行复制任务 (OneDrive -> WebDAV)
+    - name: Run Rclone Copy
+      run: |
+        # 注意：请确保你的 WebDAV 配置名称是 "mywebdav"，如果不是请手动修改下面的名字
+        # 格式：rclone copy "源:路径" "目标:路径"
+        
+        rclone copy "onedrive:" "6pan:备份" \
+          --transfers 12 \
+          --checkers 24 \
+          --buffer-size 64M \
+          --onedrive-chunk-size 100M \
+          --ignore-checksum \
+          --size-only \
+          --timeout 30m \
+          --contimeout 30m \
+          --tpslimit 10 \
+          -v
