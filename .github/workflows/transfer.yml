@@ -27,17 +27,16 @@ jobs:
     # 3. 执行复制任务 (OneDrive -> WebDAV)
     - name: Run Rclone Copy
       run: |
-        # 注意：请确保你的 WebDAV 配置名称是 "mywebdav"，如果不是请手动修改下面的名字
-        # 格式：rclone copy "源:路径" "目标:路径"
-        
+        # 这里的名字 "6pan:备份" 保持你自己的配置
         rclone copy "onedrive:" "6pan:备份" \
-          --transfers 12 \
-          --checkers 24 \
-          --buffer-size 64M \
-          --onedrive-chunk-size 100M \
+          --transfers 2 \
+          --checkers 4 \
+          --buffer-size 16M \
+          --onedrive-chunk-size 64M \
           --ignore-checksum \
           --size-only \
           --timeout 30m \
           --contimeout 30m \
-          --tpslimit 10 \
+          --tpslimit 2 \
+          --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
           -v
