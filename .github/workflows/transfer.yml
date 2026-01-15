@@ -29,8 +29,8 @@ jobs:
     - name: Run Rclone Copy
       run: |
         rclone copy "hi168:hi168-19236-6825fib7" "onedrive:" \
-          --transfers 1 \
-          --checkers 16 \
+          --transfers 4 \
+          --checkers 8 \
           --buffer-size 64M \
           --onedrive-chunk-size 50M \
           --ignore-checksum \
