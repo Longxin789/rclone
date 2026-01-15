@@ -13,6 +13,6 @@ jobs:
           echo "${{ secrets.RCLONE_CONF }}" | base64 -d > ~/.config/rclone/rclone.conf
 
       - name: List ALL Files
-        # lsf 命令列出文件，-a 代表显示隐藏文件，--format "ps" 显示路径和大小
-        # 记得把 "6pan:备份" 改成你真实的路径
-        run: rclone lsf "6pan:备份" -a --format "ps" -v
+        # 修正：去掉了错误的 -a 参数
+        # 增加了 --include ".*" 以确保显示以 . 开头的隐藏文件
+        run: rclone lsf "6pan:备份" --format "ps" --include ".*" -v
