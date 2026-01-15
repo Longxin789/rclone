@@ -36,4 +36,6 @@ jobs:
           --ignore-checksum \
           --size-only \
           --no-update-modtime \
+          --ignore-existing \
+          --ignore-errors \
           -v
