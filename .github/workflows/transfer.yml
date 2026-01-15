@@ -28,14 +28,11 @@ jobs:
     # hi168:hi168-19236-6825fib7丨onedrive丨6pan:备份丨alwaysdata
     - name: Run Rclone Copy
       run: |
-        rclone copy "onedrive:下载" "6pan:备份/下载" \
+        rclone copy "onedrive:下载" "alwaysdata:6盘/备份/下载" \
           --transfers 1 \
           --checkers 8 \
           --buffer-size 64M \
           --onedrive-chunk-size 50M \
           --ignore-checksum \
           --size-only \
-          --no-update-modtime \
-          --ignore-existing \
-          --ignore-errors \
           -v
