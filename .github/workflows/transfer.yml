@@ -35,4 +35,5 @@ jobs:
           --onedrive-chunk-size 50M \
           --ignore-checksum \
           --size-only \
+          --no-update-modtime \
           -v
