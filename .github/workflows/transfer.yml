@@ -27,8 +27,8 @@ jobs:
     # 3. 执行复制任务 (OneDrive -> WebDAV)
     - name: Run Rclone Copy
       run: |
-        rclone copy "onedrive:" "alwaysdata:6盘/备份" \
-          --transfers 4 \
+        rclone copy "onedrive:" "6pan:备份" \
+          --transfers 1 \
           --checkers 8 \
           --buffer-size 64M \
           --onedrive-chunk-size 50M \
